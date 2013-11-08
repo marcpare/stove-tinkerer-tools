@@ -37,10 +37,8 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Tinker better</h1>
-        <p>Are you tinkering with an improved cook stove? How do you determine if it's working better today than it was yesterday? The Water Boiling Test provides a simple metric to help you compare the performance of stoves.</p>
-        <p>The calculations on this page are a "finger in the wind" to guide your testing. I hope they provide an interesting first glimpse into the wide world of engineering that goes into improved cook stove design.</p>
-        
-        <p>-Marc</p>
+        <p>The Water Boiling Test provides a simple metric to help you compare the performance of stoves.</p>
+        <p>The calculations on this page are a "finger in the wind" to guide testing, a first glimpse into the depth of engineering that goes into improved cook stove design.</p>
       </div>
     </div>
 
@@ -48,7 +46,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-6">
-          <div class="model-inputs">
+          <div class="model-inputs" id="js-model-inputs">
             <h2>Input</h2>
             
             <form class="form-horizontal" role="form">
@@ -56,9 +54,9 @@
               <div class="form-group">
                 <label for="inputAmountWater" class="col-sm-3 control-label">Fuel Type</label>
                   <div class="col-sm-6">
-                    <ul class="nav nav-pills">
-                      <li class="active"><a href="">Wood</a></li>
-                      <li><a href="">Charcoal</a></li>
+                    <ul class="nav nav-pills" id="js-fuel-type">
+                      <li class="active" data-fuel="wood"><a class="fuel-type-choice" data-toggle="pill">Wood</a></li>
+                      <li  data-fuel="charcoal"><a data-toggle="pill" class="fuel-type-choice">Charcoal</a></li>
                     </ul>
                   </div>
                   
@@ -68,24 +66,91 @@
               <div class="form-group">
                 <label for="inputAmountWater" class="col-sm-3 control-label">Fuel Use</label>
                   <div class="col-sm-6">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Mass Fuel Consumed">
+                    <input type="text" class="form-control" id="js-fuel-use" placeholder="Mass Fuel Consumed">
                   </div>
-                  <label for="inputAmountWater" class="col-sm-3 control-label">[grams]</label>
+                  <label for="inputAmountWater" class="col-sm-3 control-label control-label-left">[grams]</label>
               </div>
             
             <div class="form-group">
               <label for="inputAmountWater" class="col-sm-3 control-label">Energy Delivered</label>
                 <div class="col-sm-6">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="Amount Water Boiled">
+                  <input type="text" class="form-control" id="js-amount-water" placeholder="Amount Water Boiled">
                 </div>
-                <label for="inputAmountWater" class="col-sm-3 control-label"><a>[grams]</a> <a>Liters</a></label>
+                <label for="inputAmountWater" class="col-sm-3 control-label  control-label-left"><a>[grams]</a> <a>Liters</a></label>
             </div>
           </form>
             
           </div>
           
           <div class="model-calculation">
-            <h2>Calculations</h2>
+            <h2>Output</h2>
+            <h3>Assumptions</h3>
+            <table>
+              <tr>
+                <th>Boiling Point</th>
+                <td>100.0</td>
+                <td>&deg;C</td>
+              </tr>
+              <tr>
+                <th>Starting Water Temperature</th>
+                <td>23.0</td>
+                <td>&deg;C</td>
+              </tr>
+              <tr>
+                <th>Fuel Moisture Content</th>
+                <td>15</td>
+                <td>%</td>
+              </tr>
+            </table>
+            <h3>Calculations</h3>
+            <p>Energy in <em>Wood</em> (HV): 31,000 kJ/kg</p>
+            <p>Effective calorific value (EHV) is calculated by subtracting the amount of energy required to vaporize the 15% moisture content.</p>
+            <p>EHV = LHV * (1-MC)-(MC*((HHV-T)*4.2+2260))</p>
+            <p>where</p>
+            <table>
+              <tr>
+                <th>EHV</th>
+                <td>Effective Heating Value</td>
+                <td>kJ/kg</td>
+              </tr>
+              <tr>
+                <th>LHV</th>
+                <td>Lower Heating Value</td>
+                <td>kJ/kg</td>
+              </tr>
+              <tr>
+                <th>MC</th>
+                <td>Fuel Moisture Content</td>
+                <td>%</td>
+              </tr>
+              <tr>
+                <th>T</th>
+                <td>Air Temperature</td>
+                <td>C</td>
+              </tr>
+              <tr>
+                <th>4.2</th>
+                <td>Heat Vaporization of Water</td>
+                <td>C</td>
+              </tr>
+              <tr>
+                <th>2260</th>
+                <td>Enthalpy Water</td>
+                <td>kcal/kg-C</td>
+              </tr>
+            </table>
+            
+            <p>The energy content of our fuel (EHV) can be used to calculate the amount of energy available to heat the pot by this test run.</p>
+            
+            <p>E_available = ...</p>
+            <p>where</p>
+            
+            <p>We then calculate the amount of energy it requires to boil this amount of water. We assume that a lid was used, and no water escaped during the test.</p>
+            
+            <p>....</p>
+            
+            <p>The Global Alliance of Clean Cookstoves defines the ratio of energy released to energy absorbed as the "Overall Thermal Efficiency" (OTE).</p>
+            
           </div>
           
         </div>
@@ -99,11 +164,14 @@
       <footer>
         <p>small red tile 2013</p>
       </footer>
-    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.js"><\/script>')</script>
-
+    </div> <!-- /container -->        
+        <script src="js/jquery.js"></script>
+        <script src="js/underscore.js"></script>
+        <script src="js/backbone.js"></script>
+        <script src="js/models/WBT.js"></script>
+        <script src="js/views/Input.js"></script>
+        <script src="js/views/Output.js"></script>
+        <script src="js/app.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
-
-        <script src="js/main.js"></script>
     </body>
 </html>
