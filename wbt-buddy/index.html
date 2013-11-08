@@ -55,8 +55,8 @@
                 <label for="inputAmountWater" class="col-sm-3 control-label">Fuel Type</label>
                   <div class="col-sm-6">
                     <ul class="nav nav-pills" id="js-fuel-type">
-                      <li class="active" data-fuel="wood"><a class="fuel-type-choice" data-toggle="pill">Wood</a></li>
-                      <li  data-fuel="charcoal"><a data-toggle="pill" class="fuel-type-choice">Charcoal</a></li>
+                      <li class="active" data-fuel="wood"><a class="fuel-type-choice" data-toggle="pill" href="">Wood</a></li>
+                      <li  data-fuel="charcoal"><a data-toggle="pill" class="fuel-type-choice" href="">Charcoal</a></li>
                     </ul>
                   </div>
                   
@@ -68,15 +68,10 @@
                   <div class="col-sm-6">
                     <input type="text" class="form-control" id="js-fuel-use" placeholder="Mass Fuel Consumed">
                   </div>
-                  <label for="inputAmountWater" class="col-sm-3 control-label control-label-left">[grams]</label>
+                  <label for="inputAmountWater" class="col-sm-3 control-label control-label-left"><a href="" class="unit unit-selected">grams</a></label>
               </div>
             
-            <div class="form-group">
-              <label for="inputAmountWater" class="col-sm-3 control-label">Energy Delivered</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id="js-amount-water" placeholder="Amount Water Boiled">
-                </div>
-                <label for="inputAmountWater" class="col-sm-3 control-label  control-label-left"><a>[grams]</a> <a>Liters</a></label>
+            <div class="form-group" id="js-amount-water">
             </div>
           </form>
             
@@ -164,11 +159,28 @@
       <footer>
         <p>small red tile 2013</p>
       </footer>
-    </div> <!-- /container -->        
+    </div> <!-- /container -->
+    
+      <script type="text/template" id="dimensions-template">
+        <label for="<%= idInput %>" class="col-sm-3 control-label"><%= label %></label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="<%= idInput %>" placeholder="<%= placeholder %>">
+        </div>
+        <label for="<%= idInput %>" class="col-sm-3 control-label  control-label-left">
+        
+        <% _.each(dimensions, function(dimension){ %>
+          <a data-dimension="<%= dimension.symbol %>" class="unit"><%= dimension.label%></a> 
+        <% }); %>
+        
+        </label>
+      </script>
+            
         <script src="js/jquery.js"></script>
         <script src="js/underscore.js"></script>
         <script src="js/backbone.js"></script>
         <script src="js/models/WBT.js"></script>
+        <script src="js/models/DimensionedQuantity.js"></script>
+        <script src="js/views/DimensionedQuantity.js"></script>
         <script src="js/views/Input.js"></script>
         <script src="js/views/Output.js"></script>
         <script src="js/app.js"></script>

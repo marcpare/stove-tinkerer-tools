@@ -4,6 +4,10 @@
    Author's custom styles
    ========================================================================== */
 .form-horizontal .control-label-left { text-align: left;}
+.unit { font-weight: normal; }
+.unit-selected { font-weight: bold;}
+.unit-selected:before { content: '[';}
+.unit-selected:after { content: ']';}
 
 
 

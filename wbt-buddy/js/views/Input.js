@@ -8,6 +8,12 @@ var app = app || {};
       'keyup #js-amount-water' : 'updateOnClick'
     },
     initialize: function(){
+      this.viewAmountWater = new app.DimensionedQuantityView({
+        el: '#js-amount-water',
+        model: new app.DimensionedQuantityModel({
+          dimensions: [app.Dimensions.g, app.Dimensions.L]
+        })
+      });
     },
     updateOnClick: function(){
       var fuelType = $('#js-fuel-type .active').first().data().fuel;
