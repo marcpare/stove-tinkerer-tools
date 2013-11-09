@@ -10,16 +10,13 @@ var app = app || {};
     initialize: function(){
       this.viewAmountWater = new app.DimensionedQuantityView({
         el: '#js-amount-water',
-        model: new app.DimensionedQuantityModel({
-          dimensions: [app.Dimensions.g, app.Dimensions.L]
-        })
+        model: app.quantities.amountWater
       });
     },
     updateOnClick: function(){
       var fuelType = $('#js-fuel-type .active').first().data().fuel;
       var fuelUse = $('#js-fuel-use').val();
       var amountWater = $('#js-amount-water').val();
-      console.log(fuelUse);
     }
   });
 })(jQuery);
