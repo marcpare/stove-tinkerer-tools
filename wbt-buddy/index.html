@@ -49,31 +49,11 @@
           <div class="model-inputs" id="js-model-inputs">
             <h2>Input</h2>
             
-            <form class="form-horizontal" role="form">
-              
-              <div class="form-group">
-                <label for="inputAmountWater" class="col-sm-3 control-label">Fuel Type</label>
-                  <div class="col-sm-6">
-                    <ul class="nav nav-pills" id="js-fuel-type">
-                      <li class="active" data-fuel="wood"><a class="fuel-type-choice" data-toggle="pill" href="">Wood</a></li>
-                      <li  data-fuel="charcoal"><a data-toggle="pill" class="fuel-type-choice" href="">Charcoal</a></li>
-                    </ul>
-                  </div>
-                  
-              </div>
-              
-              
-              <div class="form-group">
-                <label for="inputAmountWater" class="col-sm-3 control-label">Fuel Use</label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" id="js-fuel-use" placeholder="Mass Fuel Consumed">
-                  </div>
-                  <label for="inputAmountWater" class="col-sm-3 control-label control-label-left"><a href="" class="unit unit-selected">grams</a></label>
-              </div>
-            
-            <div class="form-group" id="js-amount-water">
-            </div>
-          </form>
+            <form class="form-horizontal" role="form">  
+              <div class="form-group" id="js-fuel-type"></div>
+              <div class="form-group" id="js-fuel-use"></div>
+              <div class="form-group" id="js-amount-water"></div>
+            </form>
             
           </div>
           
@@ -160,6 +140,22 @@
         <p>small red tile 2013</p>
       </footer>
     </div> <!-- /container -->
+      
+    <script type="text/template" id="pill-choice-template">
+      <label for="<%= idInput %>" class="col-sm-3 control-label"><%= label %></label>
+      <div class="col-sm-6">
+        <ul class="nav nav-pills">
+        <% _.each(choices, function(choice){ %>
+          <li data-fuel="<%= choice %>">
+            <a class="fuel-type-choice" data-toggle="pill" href="">
+              <%= choice %>
+            </a>
+          </li>
+          <% }); %>
+        </ul>
+      </div>
+      
+    </script>
     
       <script type="text/template" id="dimensions-template">
         <label for="<%= idInput %>" class="col-sm-3 control-label"><%= label %></label>
@@ -179,7 +175,9 @@
         <script src="js/underscore.js"></script>
         <script src="js/backbone.js"></script>
         <script src="js/models/WBT.js"></script>
+        <script src="js/models/PillChoice.js"></script>
         <script src="js/models/DimensionedQuantity.js"></script>
+        <script src="js/views/PillChoice.js"></script>
         <script src="js/views/DimensionedQuantity.js"></script>
         <script src="js/views/Input.js"></script>
         <script src="js/views/Output.js"></script>

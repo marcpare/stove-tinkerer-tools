@@ -14,6 +14,9 @@ var app = app || {};
       if (!value){ return undefined; }
       return this.convertFromBase(value);
     },
+    setDimension: function (symbol) {
+      this.set('dimension', this.get('dimensions')[symbol]);
+    },
     setValue: function (value) {
       this.set('value', this.convertToBase(value));
     }

@@ -20,7 +20,7 @@ var app = app || {};
     },
     updateUnitOnClick: function (event) {
       var unit = $(event.target).data('dimension')
-      this.model.set('dimension', app.Dimensions[unit]);
+      this.model.setDimension(unit);
       this.$field.val(this.model.displayValue());
     },
     toggleSelected: function () {
@@ -31,10 +31,10 @@ var app = app || {};
       });
     },
     render: function () {
-      $('#js-amount-water').html(this.dimensionsTemplate({
-        idInput: 'inputAmountWater',
-        label: 'Amount Water',
-        placeholder: 'Amount Water Boiled',
+      $(this.el).html(this.dimensionsTemplate({
+        idInput: this.model.get('idInput'),
+        label: this.model.get('label'),
+        placeholder: this.model.get('placeholder'),
         dimensions: this.model.get('dimensions')
       }));
       this.toggleSelected();

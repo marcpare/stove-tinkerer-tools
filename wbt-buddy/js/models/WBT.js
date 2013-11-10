@@ -4,7 +4,8 @@ var app = app || {};
     events: {
     },
     initialize: function () {  
-      this.listenTo(app.quantities.amountWater, 'change:value', this.calculate);    
+      this.listenTo(app.quantities.amountWater, 'change:value', this.calculate);
+      this.listenTo(app.quantities.fuelUse, 'change:value', this.calculate);    
     },
     calculate: function () {
       console.log('running through the WBT calculation');
