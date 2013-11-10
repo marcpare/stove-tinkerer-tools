@@ -21,6 +21,25 @@ $(function(){
     }  
   };
   
+  app.tables = {};
+  app.tables.fuels = {
+    wood: {
+      symbol: 'wood',
+      label: 'Wood',
+      value: 1000.0
+    },
+    charcoal: {
+      symbol: 'charcoal',
+      label: 'Charcoal',
+      value: 2000.0
+    },
+    ricehusk: {
+      symbol: 'ricehusk',
+      label: 'Rice Husk',
+      value: 3000.0
+    },
+  };
+  
   app.quantities = {};
   app.quantities.amountWater = new app.DimensionedQuantityModel({
     dimension: app.Dimensions.amountWater.g_H2O,
@@ -39,10 +58,12 @@ $(function(){
     placeholder: 'Amount Fuel Burned'
   });
   app.quantities.fuelType = new app.PillChoiceModel({
-    choices: ['Wood', 'Charcoal', 'Rice Hull'],
+    choices: app.tables.fuels,
+    value: 'charcoal',
     idInput: 'inputFuelType',
     label: 'Fuel Type',
   });
+  
         
   var wbt = new app.WBTModel();
   

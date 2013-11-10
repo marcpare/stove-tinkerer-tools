@@ -146,9 +146,9 @@
       <div class="col-sm-6">
         <ul class="nav nav-pills">
         <% _.each(choices, function(choice){ %>
-          <li data-fuel="<%= choice %>">
-            <a class="fuel-type-choice" data-toggle="pill" href="">
-              <%= choice %>
+          <li data-symbol="<%= choice.symbol %>" class="fuel-type-choice">
+            <a data-toggle="pill" href="">
+              <%= choice.label %>
             </a>
           </li>
           <% }); %>
