@@ -8,6 +8,7 @@ var app = app || {};
       this.listenTo(app.quantities.fuelType, 'change:value', this.calculate)
     },
     calculate: function () {
+      this.model.set('HV', app.tables.fuels.wood.heatingValue);
       console.log('running through the WBT calculation');
       console.log(app.quantities.amountWater.get('value'));
       console.log(app.quantities.fuelUse.get('value'));

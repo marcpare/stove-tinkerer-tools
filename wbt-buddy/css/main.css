@@ -8,8 +8,7 @@
 .unit-selected { font-weight: bold;}
 .unit-selected:before { content: '[';}
 .unit-selected:after { content: ']';}
-
-
+.table tbody>tr.topless>td { border-top: 0; }
 
 
 

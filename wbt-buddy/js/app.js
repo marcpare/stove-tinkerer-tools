@@ -26,17 +26,17 @@ $(function(){
     wood: {
       symbol: 'wood',
       label: 'Wood',
-      value: 1000.0
+      heatingValue: 1000.0
     },
     charcoal: {
       symbol: 'charcoal',
       label: 'Charcoal',
-      value: 2000.0
+      heatingValue: 2000.0
     },
     ricehusk: {
       symbol: 'ricehusk',
       label: 'Rice Husk',
-      value: 3000.0
+      heatingValue: 3000.0
     },
   };
   
@@ -65,8 +65,11 @@ $(function(){
   });
   
         
-  var wbt = new app.WBTModel();
-  
+  var wbt = new app.WBTModel();  
   var inputView = new app.InputView();
-  var outputView = new app.OutputView();
+  var wbtView = new app.WBTView({
+    el: '#js-model-calculation',
+    model: wbt
+  });
+  //var outputView = new app.OutputView();
 });

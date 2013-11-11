@@ -57,76 +57,8 @@
             
           </div>
           
-          <div class="model-calculation">
-            <h2>Output</h2>
-            <h3>Assumptions</h3>
-            <table>
-              <tr>
-                <th>Boiling Point</th>
-                <td>100.0</td>
-                <td>&deg;C</td>
-              </tr>
-              <tr>
-                <th>Starting Water Temperature</th>
-                <td>23.0</td>
-                <td>&deg;C</td>
-              </tr>
-              <tr>
-                <th>Fuel Moisture Content</th>
-                <td>15</td>
-                <td>%</td>
-              </tr>
-            </table>
-            <h3>Calculations</h3>
-            <p>Energy in <em>Wood</em> (HV): 31,000 kJ/kg</p>
-            <p>Effective calorific value (EHV) is calculated by subtracting the amount of energy required to vaporize the 15% moisture content.</p>
-            <p>EHV = LHV * (1-MC)-(MC*((HHV-T)*4.2+2260))</p>
-            <p>where</p>
-            <table>
-              <tr>
-                <th>EHV</th>
-                <td>Effective Heating Value</td>
-                <td>kJ/kg</td>
-              </tr>
-              <tr>
-                <th>LHV</th>
-                <td>Lower Heating Value</td>
-                <td>kJ/kg</td>
-              </tr>
-              <tr>
-                <th>MC</th>
-                <td>Fuel Moisture Content</td>
-                <td>%</td>
-              </tr>
-              <tr>
-                <th>T</th>
-                <td>Air Temperature</td>
-                <td>C</td>
-              </tr>
-              <tr>
-                <th>4.2</th>
-                <td>Heat Vaporization of Water</td>
-                <td>C</td>
-              </tr>
-              <tr>
-                <th>2260</th>
-                <td>Enthalpy Water</td>
-                <td>kcal/kg-C</td>
-              </tr>
-            </table>
-            
-            <p>The energy content of our fuel (EHV) can be used to calculate the amount of energy available to heat the pot by this test run.</p>
-            
-            <p>E_available = ...</p>
-            <p>where</p>
-            
-            <p>We then calculate the amount of energy it requires to boil this amount of water. We assume that a lid was used, and no water escaped during the test.</p>
-            
-            <p>....</p>
-            
-            <p>The Global Alliance of Clean Cookstoves defines the ratio of energy released to energy absorbed as the "Overall Thermal Efficiency" (OTE).</p>
-            
-          </div>
+          <h2>Output</h2>
+          <div id="js-model-calculation"></div>
           
         </div>
         <div class="col-lg-6">
@@ -170,6 +102,49 @@
         
         </label>
       </script>
+      
+      <script type="text/template", id="model-calculation-template">
+      <h3>Assumptions</h3>
+      
+      <table class="table">
+      <tr>
+      <th>Quantity</th>
+      <th>Symbol</th>
+      <th>Units</th>
+      <th>Value</th>
+      </tr>
+      <tr>
+      <td>Ambient Temperature</td>
+      <td>T<sub>A</sub></td>
+      <td>&deg;C</td>
+      <td><%= T_A %></td>
+      </tr>
+      <tr>
+      <td>Boiling Temperature</td>
+      <td>T<sub>B</sub></td>
+      <td>&deg;C</td>
+      <td><%= T_B %></td>
+      </tr>
+      <tr>
+      <td>Fuel Energy Content</td>
+      <td>HV</td>
+      <td>kJ/kg</td>
+      <td></td>
+      </tr>
+      <tr class="topless">
+      <td colspan=4><em>calculated at 5% moisture content for average hardwood</em></td>
+      </tr>
+      </table>
+      
+      <p>Overall Thermal Efficiency (OTE) is the ration of energy absorbed
+      by the pot of boiling water (E<sub>water</sub>) to the energy released
+      by the fuel (E<sub>fuel</sub>)</p>
+      
+      <p>OTE = E<sub>water</sub> / E<sub>fuel</sub></p>
+      
+      <h3>Energy Absorbed (E<sub>water</sub>)</h3>
+      
+      </script>
             
         <script src="js/jquery.js"></script>
         <script src="js/underscore.js"></script>
@@ -181,6 +156,7 @@
         <script src="js/views/DimensionedQuantity.js"></script>
         <script src="js/views/Input.js"></script>
         <script src="js/views/Output.js"></script>
+        <script src="js/views/WBT.js"></script>
         <script src="js/app.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
     </body>
