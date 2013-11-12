@@ -36,9 +36,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Tinker better</h1>
-        <p>The Water Boiling Test provides a simple metric to help you compare the performance of stoves.</p>
-        <p>The calculations on this page are a "finger in the wind" to guide testing, a first glimpse into the depth of engineering that goes into improved cook stove design.</p>
+        <p>A simplified Water Boiling Test. The simplest useful model of stove performance for tinkerers.</p>
       </div>
     </div>
 
@@ -117,32 +115,72 @@
       <td>Ambient Temperature</td>
       <td>T<sub>A</sub></td>
       <td>&deg;C</td>
-      <td><%= T_A %></td>
+      <td><%= T_A.as('C') %></td>
       </tr>
       <tr>
       <td>Boiling Temperature</td>
       <td>T<sub>B</sub></td>
       <td>&deg;C</td>
-      <td><%= T_B %></td>
+      <td><%= T_B.as('C') %></td>
       </tr>
       <tr>
       <td>Fuel Energy Content</td>
       <td>HV</td>
       <td>kJ/kg</td>
-      <td></td>
+      <td><%= HV %></td>
       </tr>
       <tr class="topless">
       <td colspan=4><em>calculated at 5% moisture content for average hardwood</em></td>
       </tr>
       </table>
       
-      <p>Overall Thermal Efficiency (OTE) is the ration of energy absorbed
+      <p>Overall Thermal Efficiency (OTE) is the ratio of energy absorbed
       by the pot of boiling water (E<sub>water</sub>) to the energy released
       by the fuel (E<sub>fuel</sub>)</p>
       
-      <p>OTE = E<sub>water</sub> / E<sub>fuel</sub></p>
+      <p>OTE = E<sub>H2O</sub> / E<sub>fuel</sub></p>
       
-      <h3>Energy Absorbed (E<sub>water</sub>)</h3>
+      <h3>Energy Absorbed (E<sub>H2O</sub>)</h3>
+      
+      <p>
+      Ignoring energy losses by evaporated water (use a lid to ensure this),
+      the amount of energy absorbed by the water is calculated from the
+      energy required to change its temperature from ambient temperature
+      to boiling temperature.
+      </p>
+      
+      <p>E<sub>H2O</sub> = m<sub>H2O</sub> * c<sub>pH2O</sub> * (T<sub>A</sub> – T<sub>B</sub>)</p>
+			
+      <p>where</p>
+			
+      <table class="table">
+      <tr>
+      <th>Quantity</th>
+      <th>Symbol</th>
+      <th>Units</th>
+      <th>Value</th>
+      </tr>
+      <tr>
+      <td>Mass Water</td>
+      <td>m<sub>H2O</sub></td>
+      <td>[g]</td>
+      <td><%= m_H2O.as('g_H2O') %></td>
+      </tr>
+      <tr>
+      <td>Calorific Value Water</td>
+      <td>c<sub>pH2O</sub></td>
+      <td>[kJ/kg]</td>
+      <td><%= c_pH2O.as('J/g-C') %></td>
+      </tr>
+      </table>
+      
+      <p>Substituting in the values,</p>
+      
+      <p>E<sub>H2O</sub> = m<sub>H2O</sub> * c<sub>pH2O</sub> * (T<sub>A</sub> – T<sub>B</sub>)</p>
+      
+      <p>E<sub>H2O</sub> = (<%= m_H2O.as('g_H2O') %>) * <%= c_pH2O.as('J/g-C') %> * (<%= T_A.as('C') %> – <%= T_B.as('C') %>)</p>
+      
+      <p>E<sub>H2O</sub> = 45</p>
       
       </script>
             

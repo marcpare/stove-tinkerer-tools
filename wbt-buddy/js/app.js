@@ -20,6 +20,19 @@ $(function(){
       convertFromBase: function (g_H2O) { return g_H2O / 1000.0 }
     }  
   };
+  // DELTA temperatures require different conversions
+  app.Dimensions.absoluteTemperature = {
+    C: {
+      symbol: 'C',
+      label: 'C'
+    }
+  };
+  app.Dimensions.heatCapacity = {
+    'J/g-C': {
+      symbol: 'J/g-C',
+      label: 'J/g-C'
+    }
+  };
   
   app.tables = {};
   app.tables.fuels = {
