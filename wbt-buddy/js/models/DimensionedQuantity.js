@@ -21,7 +21,7 @@ var app = app || {};
       this.set('value', this.convertToBase(value));
     },
     // duplicates the current functionality of displayValue, 
-    // I'm playing wiht the API, trying to see what works best
+    // I'm playing with the API, trying to see what works best
     as: function (symbol) {
       var dimension = this.get('dimensions')[symbol];
       var conversion = dimension.convertFromBase || _.identity;

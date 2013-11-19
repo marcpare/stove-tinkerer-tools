@@ -127,10 +127,10 @@
       <td>Fuel Energy Content</td>
       <td>HV</td>
       <td>kJ/kg</td>
-      <td><%= HV %></td>
+      <td><%= HV.as('kJ/kg') %></td>
       </tr>
       <tr class="topless">
-      <td colspan=4><em>calculated at 5% moisture content for average hardwood</em></td>
+      <td colspan=4><em><%= fuelNote %></td>
       </tr>
       </table>
       
@@ -139,6 +139,49 @@
       by the fuel (E<sub>fuel</sub>)</p>
       
       <p>OTE = E<sub>H2O</sub> / E<sub>fuel</sub></p>
+      
+      <h3>Energy Released by the Fuel (E<sub>fuel</sub>)</h3>
+      
+      <p>
+      The Fuel Use input to this model is the mass of fuel completely burned. Therefore, the energy released can be calculated from the mass of wood consumed.
+      </p>
+      
+      <p>E<sub>fuel</sub> = FC * HV</p>
+			
+      <p>where</p>
+			
+      <table class="table">
+      <tr>
+      <th>Quantity</th>
+      <th>Symbol</th>
+      <th>Units</th>
+      <th>Value</th>
+      </tr>
+      <tr>
+      <td>Mass Fuel Consumed</td>
+      <td>FC</td>
+      <td>[g]</td>
+      <td><%= FC.as('g') %></td>
+      </tr>
+      <tr>
+      <td>Heating Value Fuel</td>
+      <td>HV</td>
+      <td>[kJ/kg]</td>
+      <td><%= HV.as('kJ/kg') %></td>
+      </tr>
+      </table>
+      
+      <p>Substituting in the values,</p>
+      
+      <p>E<sub>fuel</sub> = FC * HV</p>
+
+      <p>
+      <%= equations['Energy Fuel Step 2']() %>
+      </p>
+      
+      <p>
+      <%= equations['Energy Fuel Step 3']() %>
+      </p>
       
       <h3>Energy Absorbed (E<sub>H2O</sub>)</h3>
       
@@ -176,17 +219,39 @@
       
       <p>Substituting in the values,</p>
       
-      <p>E<sub>H2O</sub> = m<sub>H2O</sub> * c<sub>pH2O</sub> * (T<sub>A</sub> – T<sub>B</sub>)</p>
+      <p>E<sub>H2O</sub> = m<sub>H2O</sub> * c<sub>pH2O</sub> * (T<sub>B</sub> – T<sub>A</sub>)</p>
+
+      <p>
+      <%= equations['Energy Water Step 2']() %>
+      </p>
       
-      <p>E<sub>H2O</sub> = (<%= m_H2O.as('g_H2O') %>) * <%= c_pH2O.as('J/g-C') %> * (<%= T_A.as('C') %> – <%= T_B.as('C') %>)</p>
+      <p>
+      <%= equations['Energy Water Step 3']() %>
+      </p>
       
-      <p>E<sub>H2O</sub> = 45</p>
+      <h3>Overall Thermal Efficiency (OTE)</h3>
+      
+      <p>
+      With our two energy contents, we can now calculated the overal thermal efficiency.
+      </p>
+      
+      <p>OTE = E<sub>H2O</sub> / E<sub>fuel</sub></p>
+      
+      <p>
+      <%= equations['OTE Step 2']() %>
+      </p>
+      
+      <p>
+      <%= equations['OTE Step 3']() %>
+      </p>
       
       </script>
-            
+      
         <script src="js/jquery.js"></script>
         <script src="js/underscore.js"></script>
         <script src="js/backbone.js"></script>
+        <script src="js/backbone.equationTemplate.js"></script>
+        <script src="js/dimensions.js"></script>
         <script src="js/models/WBT.js"></script>
         <script src="js/models/PillChoice.js"></script>
         <script src="js/models/DimensionedQuantity.js"></script>

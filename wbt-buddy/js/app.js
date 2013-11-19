@@ -1,55 +1,25 @@
 var app = app || {};
 $(function(){
   
-  app.Dimensions = {};
-  app.Dimensions.mass = {
-    g: { 
-      symbol: 'g', 
-      label: 'grams' 
-    }
-  };
-  app.Dimensions.amountWater = {
-    g_H2O: { 
-      symbol: 'g_H2O', 
-      label: 'grams' 
-    },
-    L: { 
-      symbol: 'L', 
-      label: 'Liters',
-      convertToBase: function (L) { return L * 1000.0; },
-      convertFromBase: function (g_H2O) { return g_H2O / 1000.0 }
-    }  
-  };
-  // DELTA temperatures require different conversions
-  app.Dimensions.absoluteTemperature = {
-    C: {
-      symbol: 'C',
-      label: 'C'
-    }
-  };
-  app.Dimensions.heatCapacity = {
-    'J/g-C': {
-      symbol: 'J/g-C',
-      label: 'J/g-C'
-    }
-  };
-  
   app.tables = {};
   app.tables.fuels = {
     wood: {
       symbol: 'wood',
       label: 'Wood',
-      heatingValue: 1000.0
+      heatingValue: 16347,
+      note: 'Calculated at 10% moisture content for average hardwood'
     },
     charcoal: {
       symbol: 'charcoal',
       label: 'Charcoal',
-      heatingValue: 2000.0
+      heatingValue: 26677,
+      note: 'Calculated at 5% moisture content'
     },
     ricehusk: {
       symbol: 'ricehusk',
       label: 'Rice Husk',
-      heatingValue: 3000.0
+      heatingValue: 20934,
+      note: ''
     },
   };
   
@@ -75,8 +45,7 @@ $(function(){
     value: 'charcoal',
     idInput: 'inputFuelType',
     label: 'Fuel Type',
-  });
-  
+  });  
         
   var wbt = new app.WBTModel();  
   var inputView = new app.InputView();
@@ -85,4 +54,8 @@ $(function(){
     model: wbt
   });
   //var outputView = new app.OutputView();
+  
+  
+  console.log(wbt.equationTemplate('E_H2O = [m_H2O]'));
+  
 });
