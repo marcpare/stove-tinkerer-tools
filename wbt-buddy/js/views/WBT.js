@@ -33,19 +33,19 @@ var app = app || {};
           // return "E<sub>H2O</sub> = (" + q('m_H2O') + ") * "+q('c_pH2O') + " * (" +  q('T_B') + " - " + q('T_A') + ")";
         },
         'Energy Water Step 3': function () {
-          return model.equationTemplate("E_H2O = [E_H2O kJ]");
+          return model.equationTemplate("E_H2O = [E_H2O kJ -f 0,0.00]");
         },
         'Energy Fuel Step 2': function () {
-          return model.equationTemplate("E_fuel = [FC kg] * [HV kJ/kg]");
+          return model.equationTemplate("E_fuel = [FC kg] * [HV kJ/kg -f 0,0.0]");
         },
         'Energy Fuel Step 3': function () {
-          return model.equationTemplate("E_fuel = [E_fuel kJ]");
+          return model.equationTemplate("E_fuel = [E_fuel kJ -f 0,0.0]");
         },
         'OTE Step 2': function () {
-          return model.equationTemplate("OTE = [E_H2O] / [E_fuel]");
+          return model.equationTemplate("OTE = [E_H2O kJ -f 0.0] / [E_fuel kJ -f 0.0]");
         },
         'OTE Step 3': function () {
-          return model.equationTemplate("OTE = [OTE %]");
+          return model.equationTemplate("OTE = [OTE % -f 0.00]");
         }
       };
       

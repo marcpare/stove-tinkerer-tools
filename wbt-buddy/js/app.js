@@ -14,13 +14,7 @@ $(function(){
       label: 'Charcoal',
       heatingValue: 26677,
       note: 'Calculated at 5% moisture content'
-    },
-    ricehusk: {
-      symbol: 'ricehusk',
-      label: 'Rice Husk',
-      heatingValue: 20934,
-      note: ''
-    },
+    }
   };
   
   app.quantities = {};
@@ -47,15 +41,20 @@ $(function(){
     label: 'Fuel Type',
   });  
         
-  var wbt = new app.WBTModel();  
+  app.wbt = new app.WBTModel();  
   var inputView = new app.InputView();
+  var comparisonView = new app.ComparisonView({
+    model: new app.ComparisonModel({
+      items: [
+        {label: '3-stone fire', efficiency: 15},
+        {label: 'Traditional charcoal', efficiency: 35},
+        {label: 'Well-tended 3-stone', efficiency: 25}
+      ]
+    })
+  });
   var wbtView = new app.WBTView({
     el: '#js-model-calculation',
-    model: wbt
-  });
-  //var outputView = new app.OutputView();
-  
-  
-  console.log(wbt.equationTemplate('E_H2O = [m_H2O]'));
+    model: app.wbt
+  });  
   
 });

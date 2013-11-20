@@ -9,9 +9,13 @@
 .unit-selected:before { content: '[';}
 .unit-selected:after { content: ']';}
 .table tbody>tr.topless>td { border-top: 0; }
-
-
-
+.comparison h4 { border-bottom: 1px solid #333;}
+.comparison ul { list-style: none; padding-left: 0;}
+.comparison li { color: #888;}
+.comparison li.yours { color: #333;}
+.bar { background: #888; display: inline-block; height: 1em;}
+li.yours .bar { background: #ff7f2a;}
+.source { color: #ff7f2a; font-weight: bold;}
 
 
 

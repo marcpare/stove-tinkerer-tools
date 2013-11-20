@@ -36,7 +36,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <p>A simplified Water Boiling Test. The simplest useful model of stove performance for tinkerers.</p>
+        <p>A simple and useful model of stove performance for tinkerers.</p>
       </div>
     </div>
 
@@ -44,6 +44,16 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-6">
+          <div class="procedure">
+            <h2>Procedure</h2>
+            <ul>
+              <li>Boil an amount of water (use a lid)</li>
+              <li>Record the mass of fuel used (subtract anything that's left over)</li>
+              <li>Record the mass of water boiled</li>
+              <li>Enter results below</li>
+            </ul>
+          </div>
+          
           <div class="model-inputs" id="js-model-inputs">
             <h2>Input</h2>
             
@@ -55,12 +65,31 @@
             
           </div>
           
-          <h2>Output</h2>
+          <h2>Calculations</h2>
           <div id="js-model-calculation"></div>
           
         </div>
         <div class="col-lg-6">
           <h2>Comparison</h2>
+          
+          <div class="comparison" id="js-comparison"></div>
+          
+          <!--
+          <p>Estimated from:</p>
+          <p><span class="source">Source</span>: US Environmental Protection Agency. Pollutant Emissions and Energy Efficiency under Controlled Conditions for Household Biomass Cookstoves and Implications for Metrics Useful in Setting International Test Standards.  <a href="http://www.ncbi.nlm.nih.gov/pubmed/22924525">Original</a>
+</p>
+            -->
+            <h2>Notes on the model</h2>
+            <p>
+              This model defines "Overall Thermal Efficiency" as the amount of energy that's delivered as "useful work". In this case, heating up a quantity of water.
+            </p>
+            <p>
+              We neglect accounting for heat lost as boiled-off water, exact moisture content of the fuel, and precise accounting of energy is charcoal/ash residue of the stove. These quantities do matter down the line, but they will only move the efficiency needle a few percentage points.
+            </p>
+            <p>
+              Further complicating the issue is that there is significant variability across stove/fuel types in the water boiling procedure. It's best not to focus on 5-10% efficiency changes and instead focus on major changes in stove behavior. Once a configuration hits the desired efficiency reliably, move on to a more sophisticated procedure to tune the design.
+            </p>
+          
        </div>
       </div>
 
@@ -232,7 +261,7 @@
       <h3>Overall Thermal Efficiency (OTE)</h3>
       
       <p>
-      With our two energy contents, we can now calculated the overal thermal efficiency.
+      With our two energy values, we can now calculated the overall thermal efficiency.
       </p>
       
       <p>OTE = E<sub>H2O</sub> / E<sub>fuel</sub></p>
@@ -247,6 +276,32 @@
       
       </script>
       
+      <script type="text/template" id="comparison-template">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 comparison-technology">
+            <h4>Technology</h4>
+            <ul>
+            <% _.each(items, function(item){ %>
+              <li <% if (item.label==="Your result") { %> class="yours" <% } %>><%= item.label %></li>
+            <% }) %>
+            </ul>
+          </div>
+          <div class="col-md-6 comparison-efficiency">
+            <h4>Efficiency</h4>
+            <ul>
+            <% _.each(items, function(item){ %>
+              <li <% if (item.label==="Your result") { %> class="yours" <% } %>><%= item.efficiency %>%
+              <span class="bar" style="width:<%= Math.min(item.efficiency,70) %>%">
+              </li>
+            <% }) %>            
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      </script>
+      
         <script src="js/jquery.js"></script>
         <script src="js/underscore.js"></script>
         <script src="js/backbone.js"></script>
@@ -255,12 +310,15 @@
         <script src="js/models/WBT.js"></script>
         <script src="js/models/PillChoice.js"></script>
         <script src="js/models/DimensionedQuantity.js"></script>
+        <script src="js/models/Comparison.js"></script>
         <script src="js/views/PillChoice.js"></script>
         <script src="js/views/DimensionedQuantity.js"></script>
         <script src="js/views/Input.js"></script>
         <script src="js/views/Output.js"></script>
         <script src="js/views/WBT.js"></script>
+        <script src="js/views/Comparison.js"></script>
         <script src="js/app.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/numeral.js"></script>
     </body>
 </html>

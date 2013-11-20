@@ -37,7 +37,7 @@ E_H2O = m_H2O
 
       // Combine delimiters into one regular expression via alternation.
       templateSettings = {
-        evaluate : /\[([a-zA-Z0-9_/% ]+)\]/g,
+        evaluate : /\[([a-zA-Z0-9_/%,\.\- ]+)\]/g,
         sub : /_([^\s]+)(\s?)/g  
       };
   
@@ -71,7 +71,6 @@ E_H2O = m_H2O
       var command = sp[0];
       var options = [];
       var optionMap = {};
-      
       if (!this.get(command) || !this.get(command).get('value')){
         return this.emptyString;
       }
@@ -80,13 +79,28 @@ E_H2O = m_H2O
         return this.get(command).get('value');
       } else {
         options = sp.slice(2);
-        _.each(options, function(option){
-          optionMap[option] = option;
-        });
+        var optionArgs = [];
+        var i, n, option;
+        for(i = 0, n = options.length; i < n; i++){
+          option = options[i];
+          if (option.charAt(0) === '-') {
+            optionArgs = [];
+            optionMap[option] = optionArgs;
+          }else{
+            optionArgs.push(option);
+          }
+        }
+        var formatNumber = _.identity;
+        if(optionMap['-f']){
+          formatNumber = function (number) {
+            return numeral(number).format(optionMap['-f'][0]);
+          }
+        }
+        var number = formatNumber(this.get(command).as(sp[1]))
         if(optionMap['-s']){
-            return this.get(command).as(sp[1]);
+            return number;
         }else{
-          return this.get(command).as(sp[1]) + " " + sp[1];
+          return number + " " + sp[1];
         }
       }
     }
