@@ -48,7 +48,8 @@ $(function(){
       items: [
         {label: '3-stone fire', efficiency: 15},
         {label: 'Traditional charcoal', efficiency: 35},
-        {label: 'Well-tended 3-stone', efficiency: 25}
+        {label: 'Well-tended 3-stone', efficiency: 25},
+        {label: 'Typical "Rocket" stove', efficiency: 38}
       ]
     })
   });
