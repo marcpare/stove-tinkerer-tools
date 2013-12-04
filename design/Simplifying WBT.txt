@@ -1,0 +1,58 @@
+
+The variation in WBT results using the simplified model is just a few %.
+Compare that to the variation in char energy content in char producing stoves.
+
+But what does this really matter? What do people actually use this information for?
+
+***
+
+Cases
+
+- include water evaporated
+- delta moisture content 5%, 10%
+-- look up typical moisture content delta
+
+- different local boiling points
+
+- charcoal left over ? 
+
+***
+
+For the water evaporated, the lid can reduce the water evaporated, but that part of energy could not omitted from the Energy Absorbed. 
+
+3 L water in the 28 cm diameter pot with lid is heated by electrical stove (1550±30 W) 
+
+from 22.2 C to about 95 C in about 19 min, 
+
+the water evaporated is 14 grams which is 14*2260=31640 J. If the temp. rise to boiling, the water evaporated will be more.
+
+***
+
+Think of a new term besides OTE
+
+If all remaining fuel is considered to be ‘unburned raw fuel’ then the calculated result is not the overall thermal efficiency but the work done divided by the heat probably liberated by the fire, even if the fire does not burn the fuel completely and can’t do so alter on. The difference is quite small for stoves with a fine grate, and quite large for stoves with no grate, or which can’t burn charcoal produced. As the core problem with the mis-characterisation of stoves over the past 13 years has been this issue, it is worth trying to get the user of the site to put in numbers that will deliver a predictive result in the field.
+
+ This is the fire-to-pot efficiency. The overall thermal efficiency (the exact term adopted by the Indonesian National Standards Committee at the last meeting) is the energy gained (net) by the pot divided by the energy available from the raw fuel consumed (as defined above) considering the material and mass of the pot as well as the wood type, moisture content and the usability of the fuel remaining.
+
+***
+
+Include mass of the pot?
+
+It is very likely that anyone who knows how much fuel mass they burned will also know the mass of the pot(s) and what they are made of. As demonstrated with the discussion about finned pots, the correct answer and comparison has to consider the heat absorbed by the pot. If you put a cell for pot mass and another for material (could be from a simple choice of stainless steel, aluminum and cast iron (called 1, 2 or 3) it would allow for a more accurate answer.
+
+***
+
+
+I think you have to provide two outputs on the efficiency side: a best guess at the heat transfer efficiency and an overall thermal efficiency that represents fuel consumption.
+
+
+***
+
+Yes it was. As time passed, VITA settled the fuel remaining question in 1985 by recommending that anything left be ignored (as consumed). The University of Eindhoven earlier came to the same conclusion.  Importantly, Nate Johnson found in his work in Mali that if he ignored char remaining (as if burned) the CoV was cut in half.
+
+***
+
+
+
+
+
